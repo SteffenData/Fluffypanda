@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.ElementCollection;
@@ -20,7 +21,7 @@ import javax.persistence.OneToMany;
  * @author Mikkel
  */
 @Entity
-public class Flight {
+public class Flight implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

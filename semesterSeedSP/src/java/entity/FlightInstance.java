@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import javax.persistence.Temporal;
  * @author Mikkel
  */
 @Entity
-public class FlightInstance {
+public class FlightInstance implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
