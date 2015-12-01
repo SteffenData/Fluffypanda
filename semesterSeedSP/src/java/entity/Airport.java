@@ -32,6 +32,16 @@ public class Airport {
     public Airport() {
     }
 
+    public Airport(String iataCode, String name, String city, String timeZone, FlightInstance origin, FlightInstance destination)
+    {
+        this.iataCode = iataCode;
+        this.name = name;
+        this.city = city;
+        this.timeZone = timeZone;
+        this.origin = origin;
+        this.destination = destination;
+    }
+
     public long getId() {
         return id;
     }
@@ -87,7 +97,5 @@ public class Airport {
     public void setDestination(FlightInstance destination) {
         this.destination = destination;
     }
-    
-    
     
 }

@@ -5,7 +5,9 @@
  */
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,10 +30,21 @@ public class Flight {
     
     @ManyToOne
     private Airline airline;
-    @OneToMany(mappedBy = "flight")
-    private List<FlightInstance> flightInstances;
+    @OneToMany(mappedBy = "flight") @ElementCollection
+    private List<FlightInstance> flightInstances = new ArrayList();
 
     public Flight() {
+    }
+
+    public Flight(String flightnumber, int numberOfSeats, Airline airline)
+    {
+        this.flightnumber = flightnumber;
+        this.numberOfSeats = numberOfSeats;
+        this.airline = airline;
+    }
+    
+    public void addFlightInstance(FlightInstance flightInstance){
+        flightInstances.add(flightInstance);
     }
 
     public String getFlightnumber() {
