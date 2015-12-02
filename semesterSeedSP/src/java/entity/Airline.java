@@ -58,6 +58,10 @@ public class Airline implements Serializable{
     public void setId(long id) {
         this.id = id;
     }
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
     
     
 }

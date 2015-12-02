@@ -43,12 +43,7 @@ public class DummyData
         try
         {
             em.getTransaction().begin();
-            //em.persist(flight);
             em.persist(airline);
-            
-//            em.persist(airport1);
-//            em.persist(airport2);
-//            em.persist(flightInstance);
             em.getTransaction().commit();
         } finally
         {
