@@ -6,6 +6,7 @@
 package entity;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.ElementCollection;
@@ -20,7 +21,7 @@ import javax.persistence.OneToMany;
  * @author Mikkel
  */
 @Entity
-public class Airline {
+public class Airline implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

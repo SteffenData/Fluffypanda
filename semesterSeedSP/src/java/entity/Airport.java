@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ import javax.persistence.OneToOne;
  * @author Mikkel
  */
 @Entity
-public class Airport {
+public class Airport implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -32,14 +33,14 @@ public class Airport {
     public Airport() {
     }
 
-    public Airport(String iataCode, String name, String city, String timeZone, FlightInstance origin, FlightInstance destination)
+    public Airport(String iataCode, String name, String city, String timeZone)
     {
         this.iataCode = iataCode;
         this.name = name;
         this.city = city;
         this.timeZone = timeZone;
-        this.origin = origin;
-        this.destination = destination;
+//        this.origin = origin;
+//        this.destination = destination;
     }
 
     public long getId() {
