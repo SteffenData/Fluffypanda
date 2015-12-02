@@ -8,10 +8,12 @@ package entity;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -30,13 +32,14 @@ public class FlightInstance implements Serializable{
     private Date departureDate;
     private int flightTime;
     private String flightNumber;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Airport destination;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Airport origin;
     private int availableSeats;
     private double price;
     @ManyToOne
+    @JoinColumn(name="Flight_ID")
     private Flight flight;
 
     public FlightInstance()

@@ -28,7 +28,7 @@ public class DummyData
     {
         Airline airline = new Airline("FluffyPandaAirways");
         Flight flight = new Flight("FPA12244", 255, airline);
-//        airline.addFlight(flight);
+        airline.addFlight(flight);
         
         Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
         Airport airport2 = new Airport("NU","Nuuk Airport", "Nuuk", "-2");
@@ -43,8 +43,9 @@ public class DummyData
         try
         {
             em.getTransaction().begin();
+            //em.persist(flight);
             em.persist(airline);
-//            em.persist(flight);
+            
 //            em.persist(airport1);
 //            em.persist(airport2);
 //            em.persist(flightInstance);

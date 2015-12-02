@@ -5,12 +5,12 @@
  */
 package entity;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +27,8 @@ public class Airline implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String Name;
-    @OneToMany(mappedBy = "airline") @ElementCollection
+    @OneToMany(mappedBy = "airline", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    //@ElementCollection
     private List<Flight> flights = new ArrayList();
 
     public Airline() {

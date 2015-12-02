@@ -8,11 +8,14 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,9 +32,12 @@ public class Flight implements Serializable{
     private String flightnumber;
     private int numberOfSeats;
     
-    @ManyToOne
+    @ManyToOne    
+    @JoinColumn(name="Airline_ID")
     private Airline airline;
-    @OneToMany(mappedBy = "flight") @ElementCollection
+    
+    @OneToMany(mappedBy = "flight", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST) 
+    //@ElementCollection
     private List<FlightInstance> flightInstances = new ArrayList();
 
     public Flight() {
