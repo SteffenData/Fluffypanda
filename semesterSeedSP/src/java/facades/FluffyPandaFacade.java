@@ -7,6 +7,7 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.Airline;
+import entity.Airport;
 import entity.FlightInstance;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class FluffyPandaFacade {
        return emf.createEntityManager();
    }
     
-    public List<FlightInstance> getFlightsByOriginDateNumberOfTickets (String origin, String date , int numberOfTickets){
+    public List<FlightInstance> getFlightsByOriginDateNumberOfTickets (Airport origin, Date date , int numberOfTickets){
         
         EntityManager em = getEntityManager();
         
@@ -39,12 +40,15 @@ public class FluffyPandaFacade {
    
         try {
             // Airline = a, Flight = f, Flightinstance = i,  Airport = p
-            TypedQuery<FlightInstance> q = em.createQuery("SELECT f FROM Flightinstance f JOIN f.Airport a "
+            TypedQuery<FlightInstance> q = em.createQuery("SELECT f FROM FlightInstance f "
                     + "WHERE f.origin =:origin AND f.departureDate =:date AND f.availableSeats >=:numberOfTickets ",FlightInstance.class); 
+            System.out.println("kig her    " + origin + date + numberOfTickets);
             q.setParameter("origin", origin);
             q.setParameter("date", date);
             q.setParameter("numberOfTickets", numberOfTickets);
+            System.out.println("q.tostring  " + q );
             flightList = q.getResultList();
+            
             
         }finally{
     em.close();
@@ -52,6 +56,15 @@ public class FluffyPandaFacade {
 
         return flightList;
 }
-    
+   public List<FlightInstance> getAllFlights() {
+        EntityManager em = getEntityManager();
+        List<FlightInstance> currencyList;
+        try {
+            currencyList = em.createQuery("SELECT f FROM FlightInstance f", FlightInstance.class).getResultList();
+            return currencyList;
+        } finally {
+            em.close();
+        }
+    } 
     
 }

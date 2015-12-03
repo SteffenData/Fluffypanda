@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Airport implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     private String iataCode;
     private String name;
     private String city;
@@ -43,13 +41,9 @@ public class Airport implements Serializable{
 //        this.destination = destination;
     }
 
-    public long getId() {
-        return id;
-    }
+  
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  
 
     public String getIataCode() {
         return iataCode;

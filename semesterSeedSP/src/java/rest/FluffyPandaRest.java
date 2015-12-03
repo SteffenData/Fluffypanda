@@ -10,8 +10,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entity.Airline;
+import entity.Airport;
 import entity.FlightInstance;
 import facades.FluffyPandaFacade;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -38,12 +42,15 @@ public class FluffyPandaRest {
 
     @GET
     @Path("{from}/{date}/{numtickets}")
-    @Produces("aplication/json")
-    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) {
+    @Produces("application/json")
+    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") Airport from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
 
+         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date date2 = formatter.parse(date);
+        
         JsonArray jsonFlights = new JsonArray();
         JsonObject jsonAirline = new JsonObject();
-        List<FlightInstance> Flightlist = f.getFlightsByOriginDateNumberOfTickets(from, date, numtickets);
+        List<FlightInstance> Flightlist = f.getFlightsByOriginDateNumberOfTickets(from, date2, numtickets);
         FlightInstance fi = Flightlist.get(0);
         jsonAirline.addProperty("airline", fi.getFlight().getAirline().getName());
 
