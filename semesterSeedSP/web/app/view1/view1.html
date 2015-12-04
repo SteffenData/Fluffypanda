@@ -1,8 +1,8 @@
 <h3>Search for flights</h3>
 <div>   
     Fly From <input type="text" placeholder="Enter IATA-code" ng-model="from">
-    Departure Date <input type="text" ng-model="date">
-    Seats    <input type="number" placeholder="Number Of Seats" ng-model="seats">
+    Departure Date <input type="date" ng-model="date">
+    Seats    <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats">
     <button type="submit" ng-click="getFlights()">Search</button>
 </div>      
 <div>
@@ -14,31 +14,31 @@
             <thead>
                 <tr>
                     <td>Airline</td>
+                    <td>Flight id</td>
+                    <td>Origin</td>
+                    <td>Destination</td>
                     <td>Date</td>
                     <td>Number of seats</td>
                     <td>Total price</td>
-                    <td>Flight id</td>
                     <td>Travel time</td>
-                    <td>Destination</td>
-                    <td>Origin</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="fly in data.flights">
-                    <td>{{data.airline}}</td>
+                <tr ng-repeat="fly in data">
+                    <td>{{fly.airline}}</td>
+                    <td>{{fly.flightID}}</td>
+                    <td>{{fly.origin}}</td>
+                    <td>{{fly.destination}}</td>
                     <td>{{fly.date}}</td>
                    <td>{{fly.numberOfSeats}}</td>
                     <td>{{fly.totalPrice}}</td>
-                    <td>{{fly.flightID}}</td>
                     <td>{{fly.traveltime}}</td>
-                    <td>{{fly.destination}}</td>
-                    <td>{{fly.origin}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-    
+   <p>{{MSG}}</p> 
 </div>        
     <br><br><br>
     <img src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>

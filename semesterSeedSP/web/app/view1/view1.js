@@ -13,16 +13,23 @@ angular.module('myApp.view1', ['ngRoute'])
         .controller('View1Ctrl', function ($scope, $http) {
             
                 $scope.getFlights = function () {
-                   
-                  var url = 'api/momondo/' + $scope.from + "/" + $scope.date + "/" + $scope.seats;
-                    alert("jeg er inde i metoden");
+                $scope.MSG = "";
+                $scope.data ="";
+                var year =$scope.date.getFullYear();
+                var month = $scope.date.getMonth();
+                var day = $scope.date.getDate();
+                $scope.jsdate = new Date(year,month,day,1);
+                var finaldate = $scope.jsdate.toISOString();    
+                    
+                  var url = 'api/momondo/' + $scope.from + "/" + finaldate + "/" + $scope.seats;
+                    
                     $http.get(url).then(function successCallback(res) {
-                        alert("før res.data" + res.airline); 
+                      
                         console.log(res.data);
                         $scope.data = res.data;
                      
                     }, function errorCallback(res) {
-                         alert("er jeg en fejl");
+                         $scope.MSG = "No results found";
                     });
                 };
                 
