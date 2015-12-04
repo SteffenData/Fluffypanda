@@ -1,26 +1,45 @@
-<style>h2 {color: darkblue;}</style>
-<p style="margin-top: 10px;color:#105cb6;font-style: italic; font-size: large">This seed shows a "typical" layout for an application that requires authentication and uses
-  <b>ROLES</b> to distinguish between what authenticated users can do.</p>
-<ul>
-  <li><b style="display: inline-block;width:14em;">Home and 'Using the Seed'</b>Can be seen by all</li>
-  <li><b style="display: inline-block;width:14em;">Page for Users</b> Access to data (REST) requires user to be authenticated as a <em>User</em></li>
-  <li><b style="display: inline-block;width:14em;">Page for Admins</b> Access to data (REST) requires user to be authenticated as an <em>Admin</em></li>
-</ul>
-
+<h3>Search for flights</h3>
+<div>   
+    Fly From <input type="text" placeholder="Enter IATA-code" ng-model="from">
+    Departure Date <input type="text" ng-model="date">
+    Seats    <input type="number" placeholder="Number Of Seats" ng-model="seats">
+    <button type="submit" ng-click="getFlights()">Search</button>
+</div>      
 <div>
-  <h2>Filter Demo</h2>
-  <ul>
-    <li>Using the checkmark filter with True: {{true | checkmark}} </li>
-    <li>Using the checkmark filter with False: {{false | checkmark}} </li>
-  </ul>
-  <p><span style="font-weight: bold">TESTING: </span><em>See testFilters.js</em> in the Unit Test Folder for an example of how to test a filter</p>
+    
+   <h3>Available Flights</h3>
+<div class="row">
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Airline</td>
+                    <td>Date</td>
+                    <td>Number of seats</td>
+                    <td>Total price</td>
+                    <td>Flight id</td>
+                    <td>Travel time</td>
+                    <td>Destination</td>
+                    <td>Origin</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fly in data.flights">
+                    <td>{{data.airline}}</td>
+                    <td>{{fly.date}}</td>
+                   <td>{{fly.numberOfSeats}}</td>
+                    <td>{{fly.totalPrice}}</td>
+                    <td>{{fly.flightID}}</td>
+                    <td>{{fly.traveltime}}</td>
+                    <td>{{fly.destination}}</td>
+                    <td>{{fly.origin}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
-  <h2>Factory + Service Demo</h2>
-  <p>This message is fetched from a factory: <span style="font-weight: bold"> {{ctrl.msgFromFactory}}</span></p>
-  <p>This message is fetched from a Service: <span style="font-weight: bold"> {{ctrl.msgFromService}}</span></p>
-  <p><span style="font-weight: bold">TESTING: </span>See <em>testFactories.js</em> and <em>testServices.js</em> in the Unit Test Folder for examples of how to test Factories and Services</p>
-</div>
-
-
-<h3 style="color: darkred;"><em>Important: This seed is NOT meant for Real Life Projects.</em></h3>
+    
+</div>        
+    <br><br><br>
+    <img src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>
+   

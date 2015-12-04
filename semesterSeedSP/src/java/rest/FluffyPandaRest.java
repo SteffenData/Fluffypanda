@@ -60,6 +60,7 @@ public class FluffyPandaRest {
         }
         jsonAirline.add("flights", jsonFlights);
         return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
+//        return jsonAirline.toString();
     }
 
     public JsonObject flightToJson(FlightInstance fl) {
@@ -76,4 +77,6 @@ public class FluffyPandaRest {
 
         return jsonIndividualFlight;
     }
+    
+    
 }
