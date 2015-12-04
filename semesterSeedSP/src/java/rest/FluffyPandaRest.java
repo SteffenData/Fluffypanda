@@ -43,7 +43,7 @@ public class FluffyPandaRest {
     @GET
     @Path("{from}/{date}/{numtickets}")
     @Produces("application/json")
-    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") Airport from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
+    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
 
          SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date2 = formatter.parse(date);

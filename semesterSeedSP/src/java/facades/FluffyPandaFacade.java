@@ -22,41 +22,42 @@ import javax.persistence.TypedQuery;
  * @author steffen
  */
 public class FluffyPandaFacade {
-    
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public FluffyPandaFacade() {
     }
-    
-   EntityManager getEntityManager(){
-       return emf.createEntityManager();
-   }
-    
-    public List<FlightInstance> getFlightsByOriginDateNumberOfTickets (Airport origin, Date date , int numberOfTickets){
-        
+
+    EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    public List<FlightInstance> getFlightsByOriginDateNumberOfTickets(String code, Date date, int numberOfTickets) {
+
         EntityManager em = getEntityManager();
-        
+
         List<FlightInstance> flightList;
-   
+        Airport origin = getAirportByIataCode(code);
+
         try {
             // Airline = a, Flight = f, Flightinstance = i,  Airport = p
             TypedQuery<FlightInstance> q = em.createQuery("SELECT f FROM FlightInstance f "
-                    + "WHERE f.origin =:origin AND f.departureDate =:date AND f.availableSeats >=:numberOfTickets ",FlightInstance.class); 
+                    + "WHERE f.origin =:origin AND f.departureDate =:date AND f.availableSeats >=:numberOfTickets ", FlightInstance.class);
             System.out.println("kig her    " + origin + date + numberOfTickets);
             q.setParameter("origin", origin);
             q.setParameter("date", date);
             q.setParameter("numberOfTickets", numberOfTickets);
-            System.out.println("q.tostring  " + q );
+            System.out.println("q.tostring  " + q);
             flightList = q.getResultList();
-            
-            
-        }finally{
-    em.close();
-    }
+
+        } finally {
+            em.close();
+        }
 
         return flightList;
-}
-   public List<FlightInstance> getAllFlights() {
+    }
+
+    public List<FlightInstance> getAllFlights() {
         EntityManager em = getEntityManager();
         List<FlightInstance> currencyList;
         try {
@@ -65,6 +66,21 @@ public class FluffyPandaFacade {
         } finally {
             em.close();
         }
-    } 
-    
+    }
+
+    public Airport getAirportByIataCode(String code) {
+
+        EntityManager em = getEntityManager();
+        Airport airport;
+
+        try {
+
+            airport = em.find(Airport.class, code);
+
+        } finally {
+            em.close();
+        }
+        return airport;
+    }
+
 }

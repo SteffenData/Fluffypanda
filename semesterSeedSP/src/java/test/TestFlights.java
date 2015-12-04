@@ -22,12 +22,12 @@ public class TestFlights {
     public static void main(String[] args) throws ParseException {
         
         
-           Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
+//           Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
         FluffyPandaFacade fp = new FluffyPandaFacade();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = formatter.parse("07-11-2016");
        
-        List<FlightInstance> FList = fp.getFlightsByOriginDateNumberOfTickets(airport1, date, 4);
+        List<FlightInstance> FList = fp.getFlightsByOriginDateNumberOfTickets("CPH", date, 4);
         System.out.println(" maaskedata   " + FList);
         
     }
