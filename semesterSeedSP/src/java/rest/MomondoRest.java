@@ -7,32 +7,59 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import facades.FluffyPandaFacade;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import entity.MomondoFlight;
+import facades.MomondoFacade;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author steffen
  */
-
-
+@Path("momondo/")
 public class MomondoRest {
 
-    FluffyPandaFacade f;
+    MomondoFacade f;
     Gson gsonDate;
 
     public MomondoRest() {
 
-        f = new FluffyPandaFacade();
+        f = new MomondoFacade();
         gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
-
     }
-    
-//    @GET
-//    @Path("{from}/{date}/{numtickets}")
-//    @Produces("application/json")
-//    public Response 
-    
+
+    @GET
+    @Path("{from}/{date}/{numtickets}")
+    @Consumes("application/json")
+    public Response getFlightsSimple(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws InterruptedException, ExecutionException {
+
+        List<MomondoFlight> momondoFlightList = f.getFlightsSimple(from, date, numtickets);
+
+        JsonArray jsonFlights = new JsonArray();
+        for (MomondoFlight m : momondoFlightList) {
+
+            JsonObject jo = new JsonObject();
+            jo.addProperty("airline", m.getAirline());
+            jo.addProperty("flightID", m.getFlightId());
+            jo.addProperty("origin", m.getOrigin());
+            jo.addProperty("destination", m.getDestination());
+            jo.addProperty("date", m.getDate());
+            jo.addProperty("numberOfSeats", m.getNumberOfSeats());
+            jo.addProperty("totalPrice", m.getTotalPrice());
+            jo.addProperty("traveltime", m.getTravelTime());
+
+            jsonFlights.add(jo);
+        }
+
+        return Response.status(Response.Status.OK).entity(jsonFlights.toString()).build();
+    }
+
 }

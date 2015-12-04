@@ -14,7 +14,7 @@ angular.module('myApp.view1', ['ngRoute'])
             
                 $scope.getFlights = function () {
                    
-                  var url = 'api/flightinfo/' + $scope.from + "/" + $scope.date + "/" + $scope.seats;
+                  var url = 'api/momondo/' + $scope.from + "/" + $scope.date + "/" + $scope.seats;
                     alert("jeg er inde i metoden");
                     $http.get(url).then(function successCallback(res) {
                         alert("før res.data" + res.airline); 

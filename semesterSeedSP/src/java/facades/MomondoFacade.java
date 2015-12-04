@@ -8,10 +8,16 @@ package facades;
 import deploy.DeploymentConfiguration;
 import entity.MomondoFlight;
 import entity.Urls;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import utility.GetFlightThread;
 
 /**
  *
@@ -34,7 +40,7 @@ public class MomondoFacade {
         List<Urls> urlsList;
 
         try {
-            urlsList = em.createQuery("select u FROM Urls u",Urls.class).getResultList();
+            urlsList = em.createQuery("select u FROM Urls u", Urls.class).getResultList();
 
         } finally {
             em.close();
@@ -43,12 +49,27 @@ public class MomondoFacade {
         return urlsList;
     }
 
-    public List<MomondoFlight> getFlightsSimple (String origin, String date, int numberOfTickets) {
-       
-        
-        
-        
-        
-        return null;
+    public List<MomondoFlight> getFlightsSimple(String origin, String date, int numberOfTickets) throws InterruptedException, ExecutionException {
+
+        String finalUrl;
+        List<Urls> urlsList = getAllUrls();
+        List<MomondoFlight> finalMomondoFlights = new ArrayList();
+        List<Future<List<MomondoFlight>>> futureMomondoFlight = new ArrayList();
+
+        ExecutorService ex = Executors.newFixedThreadPool(8);
+
+        for (Urls urls : urlsList) {
+            finalUrl = urls.getUrls() + "api/flightinfo/" + origin + "/" + date + "/" + numberOfTickets;
+            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl));
+            futureMomondoFlight.add(futureFlights);
+        }
+
+        for (Future<List<MomondoFlight>> futureFlights : futureMomondoFlight) {
+            List<MomondoFlight> f1 = futureFlights.get();
+            for (MomondoFlight f2 : f1) {
+                finalMomondoFlights.add(f2);
+            }
+        }
+        return finalMomondoFlights;
     }
 }
