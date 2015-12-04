@@ -24,8 +24,10 @@ import javax.persistence.Persistence;
 public class DummyData
 {
    
-    public static void main(String[] args) throws ParseException
+    public void dummy() throws ParseException
     {
+        
+        
         Airline airline = new Airline("FluffyPanda Airways");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         

@@ -1,10 +1,12 @@
 package deploy;
 
+import entity.Airline;
 import entity.Role;
 import entity.User;
 import facades.UserFacade;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.ParseException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.ws.rs.core.Context;
 import security.PasswordHash;
+import test.DummyData;
 
 @WebListener
 public class DeploymentConfiguration implements ServletContextListener {
@@ -36,11 +39,13 @@ public class DeploymentConfiguration implements ServletContextListener {
       EntityManager em = emf.createEntityManager();
       
       //This flag is set in Web.xml -- Make sure to disable for a REAL system
-      boolean makeTestUsers = context.getInitParameter("makeTestUsers").toLowerCase().equals("true");
+      boolean makeTestUsers = context.getInitParameter("makeTestUsers").toLowerCase().equals("true"); 
       if (!makeTestUsers
-              || (em.find(User.class, "user") != null && em.find(User.class, "admin") != null && em.find(User.class, "user_admin") != null)) {
+              || (em.find(User.class, "user") != null && em.find(User.class, "admin") != null && em.find(User.class, "user_admin") != null && em.find(Airline.class,"FluffyPanda Airways")!= null)) {
         return;
       }
+      DummyData dd = new DummyData();
+      dd.dummy();
       Role userRole = new Role("User");
       Role adminRole = new Role("Admin");
 
@@ -66,7 +71,9 @@ public class DeploymentConfiguration implements ServletContextListener {
       }
     } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
       Logger.getLogger(DeploymentConfiguration.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    } catch (ParseException ex) {
+          Logger.getLogger(DeploymentConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+      }
 
   }
 
