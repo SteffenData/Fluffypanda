@@ -54,6 +54,30 @@ public class FluffyPandaFacade {
 
         return flightList;
     }
+    
+    public List<FlightInstance> getFlightsByOriginDestinationDateNumberOfTickets(String from, String destination, Date date, int numtickets) {
+        EntityManager em = getEntityManager();
+
+        List<FlightInstance> flightList;
+        Airport origin = getAirportByIataCode(from);
+        Airport to = getAirportByIataCode(destination);
+
+        try {
+            // Airline = a, Flight = f, Flightinstance = i,  Airport = p
+            TypedQuery<FlightInstance> q = em.createQuery("SELECT f FROM FlightInstance f "
+                    + "WHERE f.origin =:origin AND f.destination =:destination AND f.departureDate =:date AND f.availableSeats >=:numberOfTickets ", FlightInstance.class);
+            q.setParameter("origin", origin);
+            q.setParameter("destination", to);
+            q.setParameter("date", date);
+            q.setParameter("numberOfTickets", numtickets);
+            flightList = q.getResultList();
+
+        } finally {
+            em.close();
+        }
+
+        return flightList;
+    }
 
     public List<FlightInstance> getAllFlights() {
         EntityManager em = getEntityManager();

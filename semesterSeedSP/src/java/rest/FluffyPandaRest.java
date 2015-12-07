@@ -63,6 +63,29 @@ public class FluffyPandaRest {
 //        return jsonAirline.toString();
     }
 
+    @GET
+    @Path("{from}/{destination}/{date}/{numtickets}")
+    @Produces("application/json")
+    public Response getAirlinesByOriginDestinationDateNumberOfTickets(@PathParam("from") String from, @PathParam("destination") String destination, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date2 = formatter.parse(date);
+        
+        JsonArray jsonFlights = new JsonArray();
+        JsonObject jsonAirline = new JsonObject();
+        List<FlightInstance> Flightlist = f.getFlightsByOriginDestinationDateNumberOfTickets(from, destination, date2, numtickets);
+        FlightInstance fi = Flightlist.get(0);
+        jsonAirline.addProperty("airline", fi.getFlight().getAirline().getName());
+
+        for (FlightInstance fl : Flightlist) {
+
+            jsonFlights.add(flightToJson(fl));
+        }
+        jsonAirline.add("flights", jsonFlights);
+        return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
+//        return jsonAirline.toString();
+    }
+    
     public JsonObject flightToJson(FlightInstance fl) {
 
         JsonObject jsonIndividualFlight = new JsonObject();

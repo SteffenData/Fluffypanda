@@ -27,7 +27,7 @@ public class TestFlights {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = formatter.parse("05-11-2016");
 //       
-        List<FlightInstance> FList = fp.getFlightsByOriginDateNumberOfTickets("CPH", date, 4);
+        List<FlightInstance> FList = fp.getFlightsByOriginDestinationDateNumberOfTickets("CPH","NU", date, 4);
        
         FlightInstance f = FList.get(0);
         System.out.println("date:                  " + f.getDepartureDate());

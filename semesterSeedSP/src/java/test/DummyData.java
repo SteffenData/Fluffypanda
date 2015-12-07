@@ -36,7 +36,7 @@ public class DummyData
         airline.addFlight(flight);
        
         Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
-        Airport airport2 = new Airport("NU","Nuuk Airport", "Nuuk", "-2");
+        Airport airport2 = new Airport("BCN","Barcelona Airport", "Barcelona", "+1");
          
         Date date = formatter.parse("2016-11-05");
         Date date2 = formatter.parse("2016-11-06");
