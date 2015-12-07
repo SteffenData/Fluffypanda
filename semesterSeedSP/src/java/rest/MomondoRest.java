@@ -65,4 +65,33 @@ public class MomondoRest {
         return Response.status(Response.Status.OK).entity(jsonFlights.toString()).build();
     }
 
+    @GET
+    @Path("{from}/{to}/{date}/{numtickets}")
+    @Consumes("application/json")
+    public Response getFlightsAdvanced(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws InterruptedException, ExecutionException {
+
+        List<MomondoFlight> momondoFlightList = f.getFlightsAdvanced(from, to, date, numtickets);
+
+        JsonArray jsonFlights = new JsonArray();
+
+        for (MomondoFlight m : momondoFlightList) {
+
+//            String jsondate = gsonDate.toJson(m.getDate());
+            JsonObject jo = new JsonObject();
+            jo.addProperty("airline", m.getAirline());
+            jo.addProperty("flightID", m.getFlightId());
+            jo.addProperty("origin", m.getOrigin());
+            jo.addProperty("destination", m.getDestination());
+            jo.addProperty("date", m.getDate());
+//            jo.addProperty("date", jsondate);
+            jo.addProperty("numberOfSeats", m.getNumberOfSeats());
+            jo.addProperty("totalPrice", m.getTotalPrice());
+            jo.addProperty("traveltime", m.getTravelTime());
+
+            jsonFlights.add(jo);
+        }
+
+        return Response.status(Response.Status.OK).entity(jsonFlights.toString()).build();
+    }
+    
 }

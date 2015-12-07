@@ -1,47 +1,53 @@
 <h3>Search for flights</h3>
 <div>   
-    Fly From <input type="text" placeholder="Enter IATA-code" ng-model="from">
+    Fly From <input type="text" size="2" placeholder="IATA" ng-model="from">
     Departure Date <input type="date" ng-model="date">
-    Seats    <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats">
+    Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats">
     <button type="submit" ng-click="getFlights()">Search</button>
-</div>      
+</div>  
+<br><br>
+<div>   
+    Fly From <input type="text" size="2" placeholder="IATA" ng-model="from2">
+    Fly To <input type="text"  size="2" placeholder="IATA" ng-model="to2">
+    Departure Date <input type="date" ng-model="date2">
+    Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats2">
+    <button type="submit" ng-click="getFlights2()">Search</button>
+</div> 
 <div>
-    
-   <h3>Available Flights</h3>
-<div class="row">
-    <div class="col-md-15">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Airline</td>
-                    <td>Flight Id</td>
-                    <td>Origin</td>
-                    <td>Destination</td>
-                    <td>Date</td>
-                    <td>Time</td>
-                    <td>Available seats</td>
-                    <td>Total price </td>
-                    <td>Travel time</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="fly in data">
-                    <td>{{fly.airline}}</td>
-                    <td>{{fly.flightID}}</td>
-                    <td>{{fly.origin}}</td>
-                    <td>{{fly.destination}}</td>
-                    <td>{{fly.date | date:'yyyy-MM-dd'}}</td>
-                    <td>{{fly.date | date:'HH:mm:ss Z'}}</td>
-                   <td>{{fly.numberOfSeats}}</td>
-                    <td>{{fly.totalPrice | currency: "€ "}}</td>
-                    <td>{{minToHours(fly.traveltime)}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <h3>Available Flights</h3>
+    <div class="row">
+        <div class="col-md-15">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Airline</td>
+                        <td>Flight Id</td>
+                        <td>Origin</td>
+                        <td>Destination</td>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>Available seats</td>
+                        <td>Total price </td>
+                        <td>Travel time</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="fly in data">
+                        <td>{{fly.airline}}</td>
+                        <td>{{fly.flightID}}</td>
+                        <td>{{fly.origin}}</td>
+                        <td>{{fly.destination}}</td>
+                        <td>{{fly.date| date:'yyyy-MM-dd'}}</td>
+                        <td>{{fly.date| date:'HH:mm:ss Z'}}</td>
+                        <td>{{fly.numberOfSeats}}</td>
+                        <td>{{fly.totalPrice| currency: "€ "}}</td>
+                        <td>{{minToHours(fly.traveltime)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-   <p>{{MSG}}</p> 
+    <p>{{MSG}}</p> 
 </div>        
-    <br><br><br>
-    <img src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>
-   
+<br><br><br>
+<img src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>

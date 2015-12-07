@@ -72,4 +72,29 @@ public class MomondoFacade {
         }
         return finalMomondoFlights;
     }
+    
+    
+        public List<MomondoFlight> getFlightsAdvanced(String origin, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException {
+
+        String finalUrl;
+        List<Urls> urlsList = getAllUrls();
+        List<MomondoFlight> finalMomondoFlights = new ArrayList();
+        List<Future<List<MomondoFlight>>> futureMomondoFlight = new ArrayList();
+
+        ExecutorService ex = Executors.newFixedThreadPool(8);
+
+        for (Urls urls : urlsList) {
+            finalUrl = urls.getUrls() + "api/flightinfo/" + origin + "/" + destination + "/" + date + "/" + numberOfTickets;
+            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl));
+            futureMomondoFlight.add(futureFlights);
+        }
+
+        for (Future<List<MomondoFlight>> futureFlights : futureMomondoFlight) {
+            List<MomondoFlight> f1 = futureFlights.get();
+            for (MomondoFlight f2 : f1) {
+                finalMomondoFlights.add(f2);
+            }
+        }
+        return finalMomondoFlights;
+    }
 }
