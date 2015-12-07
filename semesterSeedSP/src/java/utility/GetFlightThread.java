@@ -15,7 +15,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -69,10 +72,17 @@ public class GetFlightThread implements Callable<List<MomondoFlight>>
             for (int i = 0; i < jsonArray.size(); i++)
             {
                 JsonObject json = (JsonObject) jsonArray.get(i);
-
+//                System.out.println("jsonups" + json.get("date"));
+////                String d = json.get("date").getAsString();
+////                System.out.println("d ###" + d);
+//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//                Date date = df.parse(json.get("date").getAsString());
+//             
+//                System.out.println("date ###" + date);
                 MomondoFlight f = new MomondoFlight(
                         airlineName,
                         json.get("flightID").getAsString(),
+//                        date,
                         json.get("date").getAsString(),
                         json.get("numberOfSeats").getAsInt(),
                         json.get("totalPrice").getAsDouble(),
@@ -82,7 +92,6 @@ public class GetFlightThread implements Callable<List<MomondoFlight>>
                 momondoFlights.add(f);
             }
         }
-        System.out.println(momondoFlights.toString());
         return momondoFlights;
     }
 

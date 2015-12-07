@@ -41,7 +41,8 @@ public class DeploymentConfiguration implements ServletContextListener {
       //This flag is set in Web.xml -- Make sure to disable for a REAL system
       boolean makeTestUsers = context.getInitParameter("makeTestUsers").toLowerCase().equals("true"); 
       if (!makeTestUsers
-              || (em.find(User.class, "user") != null && em.find(User.class, "admin") != null && em.find(User.class, "user_admin") != null && em.find(Airline.class,"FluffyPanda Airways")!= null)) {
+//              && em.find(Airline.class,"FluffyPanda Airways")!= null
+              || (em.find(User.class, "user") != null && em.find(User.class, "admin") != null && em.find(User.class, "user_admin") != null )) {
         return;
       }
       DummyData dd = new DummyData();

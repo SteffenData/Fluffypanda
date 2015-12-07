@@ -25,10 +25,15 @@ public class TestFlights {
 //           Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
         FluffyPandaFacade fp = new FluffyPandaFacade();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = formatter.parse("07-11-2016");
-       
+        Date date = formatter.parse("05-11-2016");
+//       
         List<FlightInstance> FList = fp.getFlightsByOriginDateNumberOfTickets("CPH", date, 4);
-        System.out.println(" maaskedata   " + FList);
+       
+        FlightInstance f = FList.get(0);
+        System.out.println("date:                  " + f.getDepartureDate());
+        
+        
+        
         
     }
     

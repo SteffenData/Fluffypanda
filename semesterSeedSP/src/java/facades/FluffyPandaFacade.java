@@ -43,11 +43,9 @@ public class FluffyPandaFacade {
             // Airline = a, Flight = f, Flightinstance = i,  Airport = p
             TypedQuery<FlightInstance> q = em.createQuery("SELECT f FROM FlightInstance f "
                     + "WHERE f.origin =:origin AND f.departureDate =:date AND f.availableSeats >=:numberOfTickets ", FlightInstance.class);
-            System.out.println("kig her    " + origin + date + numberOfTickets);
             q.setParameter("origin", origin);
             q.setParameter("date", date);
             q.setParameter("numberOfTickets", numberOfTickets);
-            System.out.println("q.tostring  " + q);
             flightList = q.getResultList();
 
         } finally {
