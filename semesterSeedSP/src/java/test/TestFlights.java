@@ -23,16 +23,17 @@ public class TestFlights {
         
         
 //           Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
-        FluffyPandaFacade fp = new FluffyPandaFacade();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = formatter.parse("05-11-2016");
+//        FluffyPandaFacade fp = new FluffyPandaFacade();
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+//        Date date = formatter.parse("05-11-2016");
 //       
-        List<FlightInstance> FList = fp.getFlightsByOriginDestinationDateNumberOfTickets("CPH","NU", date, 4);
+//        List<FlightInstance> FList = fp.getFlightsByOriginDestinationDateNumberOfTickets("CPH","NU", date, 4);
        
-        FlightInstance f = FList.get(0);
-        System.out.println("date:                  " + f.getDepartureDate());
+//        FlightInstance f = FList.get(0);
+//        System.out.println("date:                  " + f.getDepartureDate());
         
-        
+        DummyData dummydata = new DummyData();
+        dummydata.dummy();
         
         
     }

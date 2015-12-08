@@ -27,7 +27,6 @@ public class FlightInstance implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String departureTime;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date departureDate;
     private int flightTime;
@@ -46,9 +45,8 @@ public class FlightInstance implements Serializable{
     {
     }
 
-    public FlightInstance(String departureTime, Date departureDate, int flightTime, String flightNumber, Airport destination, Airport origin, int availableSeats, double price, Flight flight)
+    public FlightInstance(Date departureDate, int flightTime, String flightNumber, Airport destination, Airport origin, int availableSeats, double price, Flight flight)
     {
-        this.departureTime = departureTime;
         this.departureDate = departureDate;
         this.flightTime = flightTime;
         this.flightNumber = flightNumber;
@@ -67,16 +65,6 @@ public class FlightInstance implements Serializable{
     public void setId(long id)
     {
         this.id = id;
-    }
-
-    public String getDepartureTime()
-    {
-        return departureTime;
-    }
-
-    public void setDepartureTime(String departureTime)
-    {
-        this.departureTime = departureTime;
     }
 
     public Date getDepartureDate()

@@ -29,7 +29,7 @@ public class DummyData
         
         
         Airline airline = new Airline("FluffyPanda Airways");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         
         Flight flight = new Flight("FPA12244", 255, airline);
        
@@ -38,12 +38,20 @@ public class DummyData
         Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
         Airport airport2 = new Airport("BCN","Barcelona Airport", "Barcelona", "+1");
          
-        Date date = formatter.parse("2016-11-05");
-        Date date2 = formatter.parse("2016-11-06");
-        FlightInstance flightInstance = new FlightInstance("11.00",date,240,"c43",airport1,airport2,255,2000.00,flight);
-        FlightInstance flightInstance2 = new FlightInstance("11.00",date2,240,"c43",airport1,airport2,255,2000.00,flight);
-        FlightInstance flightInstance3 = new FlightInstance("17.00",date,240,"c43",airport2,airport1,255,2000.00,flight);
-        FlightInstance flightInstance4 = new FlightInstance("17.00",date2,240,"c43",airport2,airport1,255,2000.00,flight);
+//        Date date1 = formatter.parse("2001-07-04T12:08:56.235-0700");
+     
+
+        
+        Date date = formatter.parse("2016-01-05T11:00:00.000-0100");
+        Date date2 = formatter.parse("2016-01-06T11:00:00.234-0100");
+        Date date3 = formatter.parse("2016-01-05T17:00:00.214-0100");
+        Date date4 = formatter.parse("2016-01-06T17:00:00.111-0100");
+        
+        
+        FlightInstance flightInstance = new FlightInstance(date,240,"c43",airport1,airport2,255,80.00,flight);
+        FlightInstance flightInstance2 = new FlightInstance(date2,240,"c43",airport1,airport2,255,80.00,flight);
+        FlightInstance flightInstance3 = new FlightInstance(date3,240,"c43",airport2,airport1,255,80.00,flight);
+        FlightInstance flightInstance4 = new FlightInstance(date4,240,"c43",airport2,airport1,255,80.00,flight);
         flight.addFlightInstance(flightInstance);
         flight.addFlightInstance(flightInstance2);
         flight.addFlightInstance(flightInstance3);

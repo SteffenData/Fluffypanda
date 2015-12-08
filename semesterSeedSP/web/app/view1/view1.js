@@ -18,7 +18,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 var year = $scope.date.getFullYear();
                 var month = $scope.date.getMonth();
                 var day = $scope.date.getDate();
-                $scope.jsdate = new Date(year, month, day, 1);
+                $scope.jsdate = new Date(year, month, day, 2);
                 var finaldate = $scope.jsdate.toISOString();
 
                 var url = 'api/momondo/' + $scope.from + "/" + finaldate + "/" + $scope.seats;
@@ -39,7 +39,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 var year = $scope.date2.getFullYear();
                 var month = $scope.date2.getMonth();
                 var day = $scope.date2.getDate();
-                $scope.jsdate2 = new Date(year, month, day, 1);
+                $scope.jsdate2 = new Date(year, month, day, 2);
                 var finaldate2 = $scope.jsdate2.toISOString();
 
                 var url = 'api/momondo/' + $scope.from2 + "/"+ $scope.to2 +"/" + finaldate2 + "/" + $scope.seats2;

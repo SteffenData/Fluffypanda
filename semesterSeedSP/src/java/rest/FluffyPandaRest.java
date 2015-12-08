@@ -28,14 +28,12 @@ import javax.ws.rs.core.Response;
  * @author steffen
  */
 @Path("flightinfo/")
-public class FluffyPandaRest
-{
+public class FluffyPandaRest {
 
     FluffyPandaFacade f;
     Gson gsonDate;
 
-    public FluffyPandaRest()
-    {
+    public FluffyPandaRest() {
 
         f = new FluffyPandaFacade();
         gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
@@ -45,8 +43,7 @@ public class FluffyPandaRest
     @GET
     @Path("{from}/{date}/{numtickets}")
     @Produces("application/json")
-    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException
-    {
+    public Response getAirlinesByOriginDateNumberOfTickets(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2 = formatter.parse(date);
@@ -54,20 +51,17 @@ public class FluffyPandaRest
         JsonArray jsonFlights = new JsonArray();
         JsonObject jsonAirline = new JsonObject();
         List<FlightInstance> Flightlist = f.getFlightsByOriginDateNumberOfTickets(from, date2, numtickets);
-        try
-        {
+        try {
             FlightInstance fi = Flightlist.get(0);
             jsonAirline.addProperty("airline", fi.getFlight().getAirline().getName());
 
-            for (FlightInstance fl : Flightlist)
-            {
+            for (FlightInstance fl : Flightlist) {
 
                 jsonFlights.add(flightToJson(fl));
             }
             jsonAirline.add("flights", jsonFlights);
             return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
         }
     }
@@ -75,8 +69,7 @@ public class FluffyPandaRest
     @GET
     @Path("{from}/{destination}/{date}/{numtickets}")
     @Produces("application/json")
-    public Response getAirlinesByOriginDestinationDateNumberOfTickets(@PathParam("from") String from, @PathParam("destination") String destination, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException
-    {
+    public Response getAirlinesByOriginDestinationDateNumberOfTickets(@PathParam("from") String from, @PathParam("destination") String destination, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2 = formatter.parse(date);
@@ -84,27 +77,29 @@ public class FluffyPandaRest
         JsonArray jsonFlights = new JsonArray();
         JsonObject jsonAirline = new JsonObject();
         List<FlightInstance> Flightlist = f.getFlightsByOriginDestinationDateNumberOfTickets(from, destination, date2, numtickets);
-        FlightInstance fi = Flightlist.get(0);
-        jsonAirline.addProperty("airline", fi.getFlight().getAirline().getName());
+        try {
+            FlightInstance fi = Flightlist.get(0);
+            jsonAirline.addProperty("airline", fi.getFlight().getAirline().getName());
 
-        for (FlightInstance fl : Flightlist)
-        {
+            for (FlightInstance fl : Flightlist) {
 
-            jsonFlights.add(flightToJson(fl));
+                jsonFlights.add(flightToJson(fl));
+            }
+            jsonAirline.add("flights", jsonFlights);
+            return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
         }
-        jsonAirline.add("flights", jsonFlights);
-        return Response.status(Response.Status.OK).entity(jsonAirline.toString()).build();
-//        return jsonAirline.toString();
     }
 
-    public JsonObject flightToJson(FlightInstance fl)
-    {
+    public JsonObject flightToJson(FlightInstance fl) {
 
         JsonObject jsonIndividualFlight = new JsonObject();
         String jsondate = gsonDate.toJson(fl.getDepartureDate());
+        String unquotedJsonDate=jsondate.split("\"")[1];
         System.out.println("fl.getDepartureDate(): " + fl.getDepartureDate());
         System.out.println("jsondate: " + jsondate);
-        jsonIndividualFlight.addProperty("date", jsondate);          // husk også time senere
+        jsonIndividualFlight.addProperty("date", unquotedJsonDate);          // husk også time senere
         jsonIndividualFlight.addProperty("numberOfSeats", fl.getAvailableSeats());
         jsonIndividualFlight.addProperty("totalPrice", fl.getPrice());
         jsonIndividualFlight.addProperty("flightID", fl.getFlightNumber());
