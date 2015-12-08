@@ -66,12 +66,16 @@ public class GetFlightThread implements Callable<List<MomondoFlight>>
             }
             jsonObject = new JsonParser().parse(stringBuilder.toString()).getAsJsonObject();
 
-            airlineName = jsonObject.get("airline").getAsString();
-            jsonArray = jsonObject.get("flights").getAsJsonArray();
-
-            for (int i = 0; i < jsonArray.size(); i++)
+            if (jsonObject.get("airline") == null)
             {
-                JsonObject json = (JsonObject) jsonArray.get(i);
+                return momondoFlights;
+            } else
+            {
+                airlineName = jsonObject.get("airline").getAsString();
+                jsonArray = jsonObject.get("flights").getAsJsonArray();
+                for (int i = 0; i < jsonArray.size(); i++)
+                {
+                    JsonObject json = (JsonObject) jsonArray.get(i);
 //                System.out.println("jsonups" + json.get("date"));
 ////                String d = json.get("date").getAsString();
 ////                System.out.println("d ###" + d);
@@ -79,21 +83,21 @@ public class GetFlightThread implements Callable<List<MomondoFlight>>
 //                Date date = df.parse(json.get("date").getAsString());
 //             
 //                System.out.println("date ###" + date);
-                MomondoFlight f = new MomondoFlight(
-                        airlineName,
-                        json.get("flightID").getAsString(),
-//                        date,
-                        json.get("date").getAsString(),
-                        json.get("numberOfSeats").getAsInt(),
-                        json.get("totalPrice").getAsDouble(),
-                        json.get("traveltime").getAsInt(),
-                        json.get("destination").getAsString(),
-                        json.get("origin").getAsString());
-                momondoFlights.add(f);
+                    MomondoFlight f = new MomondoFlight(
+                            airlineName,
+                            json.get("flightID").getAsString(),
+                            //                        date,
+                            json.get("date").getAsString(),
+                            json.get("numberOfSeats").getAsInt(),
+                            json.get("totalPrice").getAsDouble(),
+                            json.get("traveltime").getAsInt(),
+                            json.get("destination").getAsString(),
+                            json.get("origin").getAsString());
+                    momondoFlights.add(f);
+                }
+                return momondoFlights;
             }
         }
-        return momondoFlights;
+            return momondoFlights;
     }
-
-   
 }
