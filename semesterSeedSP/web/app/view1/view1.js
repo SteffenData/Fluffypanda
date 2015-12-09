@@ -7,14 +7,16 @@ angular.module('myApp.view1', ['ngRoute'])
                     templateUrl: 'app/view1/view1.html',
                     controller: 'View1Ctrl',
                     controllerAs: 'ctrl'
-                }).when('/reservation',{
-                   templateUrl: 'app/reservation/reservation.html',
-                   controller: 'View1Ctrl',
-                   controllerAs: 'ctrl'
+                }).when('/reservation', {
+                    templateUrl: 'app/view1/reservation.html',
+                    controller: 'View1Ctrl',
+                    controllerAs: 'ctrl'
                 });
             }])
 
         .controller('View1Ctrl', function ($scope, $http) {
+
+            $scope.passengerReservationList = [];
 
             $scope.getFlights = function () {
                 $scope.MSG = "";
@@ -70,14 +72,28 @@ angular.module('myApp.view1', ['ngRoute'])
                     result = ((min - min % 60) / 60 + "h" + " " + min % 60 + "m");
                 }
                 return result;
-//                   var minutes = min%60;
-//                   var hours = (min - minutes)/60;
-//                   return hours + ":"+ minutes;
             };
+            
+            $scope.prepareReservation = function (flightID) {
+                $scope.reservationFlightID = flightID;
+            };
+
+            $scope.addPassenger = function (p){        
+               var passenger = new Object();
+               passenger.firstname = p.reservationFirstname;
+               passenger.lastname = p.reservationLastname;
+               
+                $scope.passengerReservationList.push(passenger);
+                console.log($scope.passengerReservationList.length);
+            }
+            
+            $scope.removePassenger = function(){
+                $scope.passengerReservationList.pop();
+            }
+            
             $scope.reserve = function () {
+                
+            }
 
-
-
-            };
 
         });
