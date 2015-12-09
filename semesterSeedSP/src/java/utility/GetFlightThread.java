@@ -48,6 +48,7 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
     public List<MomondoFlight> call() throws Exception {
         momondoFlights = new ArrayList<>();
         jsonObject = new JsonObject();
+
         gson = new Gson();
         url = new URL(finalUrl);
         urlConnection = url.openConnection();
