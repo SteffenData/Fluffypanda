@@ -58,6 +58,7 @@ public class MomondoRest {
             jo.addProperty("numberOfSeats", m.getNumberOfSeats());
             jo.addProperty("totalPrice", m.getTotalPrice());
             jo.addProperty("traveltime", m.getTravelTime());
+            jo.addProperty("normalurl", m.getNormalUrl());
 
             jsonFlights.add(jo);
         }
@@ -87,6 +88,7 @@ public class MomondoRest {
             jo.addProperty("numberOfSeats", m.getNumberOfSeats());
             jo.addProperty("totalPrice", m.getTotalPrice());
             jo.addProperty("traveltime", m.getTravelTime());
+            jo.addProperty("normalurl", m.getNormalUrl());
 
             jsonFlights.add(jo);
         }

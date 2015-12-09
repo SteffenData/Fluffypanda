@@ -23,8 +23,9 @@ public class MomondoFlight {
     private int travelTime;
     private String destination;
     private String origin;
+    private String normalUrl;
 
-    public MomondoFlight(String airline, String flightId, String date, int numberOfSeats, double totalPrice, int travelTime, String destination, String origin) {
+    public MomondoFlight(String airline, String flightId, String date, int numberOfSeats, double totalPrice, int travelTime, String destination, String origin, String normalUrl) {
         this.airline = airline;
         this.flightId = flightId;
         this.date = date;
@@ -33,6 +34,15 @@ public class MomondoFlight {
         this.travelTime = travelTime;
         this.destination = destination;
         this.origin = origin;
+        this.normalUrl = normalUrl;
+    }
+
+    public String getNormalUrl() {
+        return normalUrl;
+    }
+
+    public void setNormalUrl(String normalUrl) {
+        this.normalUrl = normalUrl;
     }
 
     public String getAirline() {

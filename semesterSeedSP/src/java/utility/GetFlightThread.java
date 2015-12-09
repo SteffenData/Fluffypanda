@@ -30,6 +30,7 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
 
     private URL url = null;
     private String finalUrl = "";
+    private String normalUrl = "";
     private URLConnection urlConnection = null;
     private InputStreamReader inputStream = null;
     private final StringBuilder stringBuilder = new StringBuilder();
@@ -40,8 +41,9 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
     private JsonObject jsonObject;
     private JsonArray jsonArray;
 
-    public GetFlightThread(String finalUrl) {
+    public GetFlightThread(String finalUrl, String normalUrl) {
         this.finalUrl = finalUrl;
+        this.normalUrl = normalUrl;
     }
 
     @Override
@@ -78,7 +80,8 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
                             json.get("totalPrice").getAsDouble(),
                             json.get("traveltime").getAsInt(),
                             json.get("destination").getAsString(),
-                            json.get("origin").getAsString());
+                            json.get("origin").getAsString(),
+                            normalUrl);
                     momondoFlights.add(f);
                 }
                 return momondoFlights;

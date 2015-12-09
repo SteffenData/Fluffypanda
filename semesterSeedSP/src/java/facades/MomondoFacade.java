@@ -59,8 +59,9 @@ public class MomondoFacade {
         ExecutorService ex = Executors.newFixedThreadPool(8);
 
         for (Urls urls : urlsList) {
+            String normalUrl = urls.getUrls();
             finalUrl = urls.getUrls() + "api/flightinfo/" + origin + "/" + date + "/" + numberOfTickets;
-            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl));
+            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl,normalUrl));
             futureMomondoFlight.add(futureFlights);
         }
 
@@ -84,8 +85,9 @@ public class MomondoFacade {
         ExecutorService ex = Executors.newFixedThreadPool(8);
 
         for (Urls urls : urlsList) {
+        String normalUrl = urls.getUrls();
             finalUrl = urls.getUrls() + "api/flightinfo/" + origin + "/" + destination + "/" + date + "/" + numberOfTickets;
-            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl));
+            Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl,normalUrl));
             futureMomondoFlight.add(futureFlights);
         }
 
