@@ -97,8 +97,6 @@ public class FluffyPandaRest {
         JsonObject jsonIndividualFlight = new JsonObject();
         String jsondate = gsonDate.toJson(fl.getDepartureDate());
         String unquotedJsonDate=jsondate.split("\"")[1];
-        System.out.println("fl.getDepartureDate(): " + fl.getDepartureDate());
-        System.out.println("jsondate: " + jsondate);
         jsonIndividualFlight.addProperty("date", unquotedJsonDate);          // husk også time senere
         jsonIndividualFlight.addProperty("numberOfSeats", fl.getAvailableSeats());
         jsonIndividualFlight.addProperty("totalPrice", fl.getPrice());

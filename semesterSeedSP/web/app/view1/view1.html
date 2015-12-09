@@ -29,6 +29,8 @@
                         <td>Available seats</td>
                         <td>Total price </td>
                         <td>Travel time</td>
+                        <td>url</td>
+                        <td>Make reservation</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,12 +44,16 @@
                         <td>{{fly.numberOfSeats}}</td>
                         <td>{{fly.totalPrice| currency: "€ "}}</td>
                         <td>{{minToHours(fly.traveltime)}}</td>
+                        <td>{{fly.normalurl}}</td>
+                        <td><a href="#reservation" ng-click="reserve(fly.flightID)"> <button>Reserve</button></a></td>
+                
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <p>{{MSG}}</p> 
-</div>        
+</div>
+
 <br><br><br>
 <img src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>

@@ -7,6 +7,10 @@ angular.module('myApp.view1', ['ngRoute'])
                     templateUrl: 'app/view1/view1.html',
                     controller: 'View1Ctrl',
                     controllerAs: 'ctrl'
+                }).when('/reservation',{
+                   templateUrl: 'app/reservation/reservation.html',
+                   controller: 'View1Ctrl',
+                   controllerAs: 'ctrl'
                 });
             }])
 
@@ -42,7 +46,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 $scope.jsdate2 = new Date(year, month, day, 2);
                 var finaldate2 = $scope.jsdate2.toISOString();
 
-                var url = 'api/momondo/' + $scope.from2 + "/"+ $scope.to2 +"/" + finaldate2 + "/" + $scope.seats2;
+                var url = 'api/momondo/' + $scope.from2 + "/" + $scope.to2 + "/" + finaldate2 + "/" + $scope.seats2;
 
                 $http.get(url).then(function successCallback(res) {
 
@@ -69,6 +73,11 @@ angular.module('myApp.view1', ['ngRoute'])
 //                   var minutes = min%60;
 //                   var hours = (min - minutes)/60;
 //                   return hours + ":"+ minutes;
+            };
+            $scope.reserve = function () {
+
+
+
             };
 
         });
