@@ -73,27 +73,33 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
                 return result;
             };
-            
+
             $scope.prepareReservation = function (flightID) {
                 $scope.reservationFlightID = flightID;
             };
 
-            $scope.addPassenger = function (p){        
-               var passenger = new Object();
-               passenger.firstname = p.reservationFirstname;
-               passenger.lastname = p.reservationLastname;
-               
+            $scope.addPassenger = function (p) {
+                var passenger = new Object();
+                passenger.firstname = p.reservationFirstname;
+                passenger.lastname = p.reservationLastname;
                 $scope.passengerReservationList.push(passenger);
-                console.log($scope.passengerReservationList.length);
-            }
-            
-            $scope.removePassenger = function(){
+            };
+
+            $scope.removePassenger = function () {
                 $scope.passengerReservationList.pop();
-            }
-            
+            };
+
             $scope.reserve = function () {
+                $scope.data = "";
+                for (var i = 0; i < $scope.data.length; i++) {
+                    var flightObject = $scope.data[i];
+                    if (flightObject.flightID === $scope.reservationFlightID) {
+                        $scope.oneFlight = angular.copy($scope.data[i]);
+                        return;
+                    }
+                }
                 
-            }
+            };
 
 
         });
