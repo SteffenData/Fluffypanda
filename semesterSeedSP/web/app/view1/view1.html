@@ -46,7 +46,7 @@
                         <td>{{fly.totalPrice| currency: "€ "}}</td>
                         <td>{{minToHours(fly.traveltime)}}</td>
                         <td>{{fly.normalurl}}</td>
-                        <td><a href="#reservation" ng-click="prepareReservation(fly.flightID)"> <button>Reserve</button></a></td>
+                        <td><a href="#reservation" ng-click="prepareReservation(fly.flightID, fly.normalurl)"> <button>Reserve</button></a></td>
                     </tr>
                 </tbody>
             </table>

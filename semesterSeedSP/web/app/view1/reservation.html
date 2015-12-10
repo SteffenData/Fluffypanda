@@ -13,15 +13,18 @@
         <button ng-click="addPassenger(passenger)">Add</button>
         <button ng-click="removePassenger()">Remove</button>
         <br><br><br><br>
-        <button ng-click="reserve()">Make reservation</button>
+        <button ng-click="makeReservation()">Make reservation</button>
         <br><br><br><br>
         <a href="#view1"><button>Home</button></a>
     </div>
     <div class="col-md-6">
         <h3>Passengers added</h3>
         <ul ng-repeat ="p in passengerReservationList track by $index">
-            <li>{{p.lastname}}, {{p.firstname}}</li>
+            <li>{{p.lastName}}, {{p.firstName}}</li>
         </ul>
+    </div>
+    <div class="col-md-4">
+        <p>{{reservationMsg}}</p>
     </div>
 </div>
 

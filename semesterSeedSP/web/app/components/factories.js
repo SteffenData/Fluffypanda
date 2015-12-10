@@ -13,15 +13,25 @@ angular.module('myApp.factories', []).
             };
         })
         .factory('flightFactory', function () {
-
+            var reservationUrl ="";
             var reservationFlightID = "";
             var airid = {};
+            
             airid.getreservationFlightID = function () {
+                
                 return reservationFlightID;
             };
 
             airid.setreservationFlightID = function (id) {
                 reservationFlightID = id;
+            };
+             airid.getreservationUrl = function () {
+                
+                return reservationUrl;
+            };
+             airid.setreservationUrl = function (url) {
+                
+                reservationUrl = url;
             };
 
             return airid;

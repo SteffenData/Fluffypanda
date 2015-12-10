@@ -75,14 +75,15 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         return result;
     };
 
-    $scope.prepareReservation = function (flightID) {
+    $scope.prepareReservation = function (flightID,url) {
         flightFactory.setreservationFlightID(flightID);
+        flightFactory.setreservationUrl(url);
     };
 
     $scope.addPassenger = function (p) {
         var passenger = new Object();
-        passenger.firstname = p.reservationFirstname;
-        passenger.lastname = p.reservationLastname;
+        passenger.firstName = p.reservationFirstname;
+        passenger.lastName = p.reservationLastname;
         $scope.passengerReservationList.push(passenger);
     };
 
@@ -90,20 +91,31 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         $scope.passengerReservationList.pop();
     };
 
-    $scope.reserve = function () {
-        $scope.data = "";
-        for (var i = 0; i < $scope.data.length; i++) {
-            var flightObject = $scope.data[i];
+    $scope.makeReservation = function () {
+       
+            var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
+            var jsonObject = JSON.stringify({flightID:flightFactory.getreservationFlightID(),
+                numberOfSeats:$scope.reservationSeats,
+                ReserveeName:$scope.reservationName,
+                ReservePhone:$scope.reservationPhone,
+                ReserveeEmail:$scope.reservationEmail,
+                Passengers:$scope.passengerReservationList});
+            
+           $http.post(flightUrl, jsonObject).then(function successCallback(res) {
 
-            if (flightObject.flightID === $scope.reservationFlightID) {
-                $scope.oneFlight = angular.copy($scope.data[i]);
-                return;
-            }
-            var flightUrl = $scope.oneFlight.normalurl;
+            console.log(res.data);
+            $scope.reservationMsg = "Your reservation was successfull";
 
-        }
+        }, function errorCallback(res) {
+           $scope.reservationMsg = "Failed to complete the reservation";
+        });
+           
+            
+            
+ 
+        };
 
-    };
+    
 
 
 });
