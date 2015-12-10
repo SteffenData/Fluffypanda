@@ -90,11 +90,14 @@ angular.module('myApp.view1', ['ngRoute'])
             };
 
             $scope.reserve = function () {
+                alert(hej);
                 $scope.data = "";
                 for (var i = 0; i < $scope.data.length; i++) {
                     var flightObject = $scope.data[i];
+               
                     if (flightObject.flightID === $scope.reservationFlightID) {
                         $scope.oneFlight = angular.copy($scope.data[i]);
+                   
                         return;
                     }
                 }
