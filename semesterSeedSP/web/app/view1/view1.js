@@ -75,7 +75,7 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         return result;
     };
 
-    $scope.prepareReservation = function (flightID,url) {
+    $scope.prepareReservation = function (flightID, url) {
         flightFactory.setreservationFlightID(flightID);
         flightFactory.setreservationUrl(url);
     };
@@ -92,31 +92,25 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
     };
 
     $scope.makeReservation = function () {
-       
-            var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
-            var jsonObject = JSON.stringify({flightID:flightFactory.getreservationFlightID(),
-                numberOfSeats:$scope.reservationSeats,
-                ReserveeName:$scope.reservationName,
-                ReservePhone:$scope.reservationPhone,
-                ReserveeEmail:$scope.reservationEmail,
-                Passengers:$scope.passengerReservationList});
-            
-           $http.post(flightUrl, jsonObject).then(function successCallback(res) {
+        var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
+        var finalUrl = "api/momondo";
+        var jsonObject = JSON.stringify({flightID: flightFactory.getreservationFlightID(),
+            url: flightUrl,
+            numberOfSeats: $scope.reservationSeats,
+            ReserveeName: $scope.reservationName,
+            ReservePhone: $scope.reservationPhone,
+            ReserveeEmail: $scope.reservationEmail,
+            Passengers: $scope.passengerReservationList});
+
+        $http.post(finalUrl, jsonObject).then(function successCallback(res) {
 
             console.log(res.data);
             $scope.reservationMsg = "Your reservation was successfull";
 
         }, function errorCallback(res) {
-           $scope.reservationMsg = "Failed to complete the reservation";
+            $scope.reservationMsg = "Failed to complete the reservation";
         });
-           
-            
-            
- 
-        };
-
-    
-
+    };
 
 });
 
