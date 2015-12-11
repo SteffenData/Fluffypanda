@@ -1,18 +1,22 @@
 <h1 style = color:white><b>Lucky Airline Search</b></h1>
 <h3>Search for flights</h3>
-<div id="div-1" class="col-md-15">   
-    Fly From <input type="text" size="2" placeholder="IATA" ng-model="from">
-    Departure Date <input type="date" ng-model="date">
-    Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats">
-    <button type="submit" ng-click="getFlights()">Search</button>
+<div id="div-1" class="col-md-15"> 
+    <form>
+        Fly From <input type="text" size="2" placeholder="IATA" ng-model="from" required>
+        Departure Date <input type="date" ng-model="date" required>
+        Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats" required>
+        <button type="submit" ng-click="getFlights()">Search</button>
+    </form>
 </div>  
 <br><br>
 <div id="div-1" class="col-md-15">   
-    Fly From <input type="text" size="2" placeholder="IATA" ng-model="from2">
-    Fly To <input type="text"  size="2" placeholder="IATA" ng-model="to2">
-    Departure Date <input type="date" ng-model="date2">
-    Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats2">
-    <button type="submit" ng-click="getFlights2()">Search</button>
+    <form>
+        Fly From <input type="text" size="2" placeholder="IATA" ng-model="from2" required>
+        Fly To <input type="text"  size="2" placeholder="IATA" ng-model="to2" required>
+        Departure Date <input type="date" ng-model="date2" required>
+        Seats <input type="number" placeholder="Number Of Seats" min="1" ng-model="seats2" required>
+        <button type="submit" ng-click="getFlights2()">Search</button>
+    </form>
 </div> 
 <div>
     <h3 >Available Flights</h3>
@@ -55,9 +59,9 @@
     <p>{{MSG}}</p> 
 </div>
 <div class="col-md-3"></div>
-<div class="idcol-md-9" id="cf">
-<br><br><br>
-<img class="bottom" src="app/view1/img/our.jpg" width="400" height="200" alt="Jeg kommer snart tilbage"/>
-<img class="top" src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>
-<p>Sponsered by Fluffy Panda Airlines</p>
+<div class="col-md-9" id="cf">
+    <br>
+    <p>Sponsored by</p><h4><b style="color: darkblue">FluffyPanda Airlines</b></h4>
+    <img class="bottom" src="app/view1/img/our.jpg" width="400" height="200" alt="Jeg kommer snart tilbage"/>
+    <img class="top" src="app/view1/img/Fluffypanda.JPG" width="400" height="200" alt="Jeg kommer snart tilbage"/>
 </div>

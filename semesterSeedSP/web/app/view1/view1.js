@@ -84,7 +84,11 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         var passenger = new Object();
         passenger.firstName = p.reservationFirstname;
         passenger.lastName = p.reservationLastname;
+        if(passenger.firstName!="" && passenger.lastName!=""){
         $scope.passengerReservationList.push(passenger);
+        $scope.passenger.reservationFirstname = "";
+        $scope.passenger.reservationLastname = "";
+        } 
     };
 
     $scope.removePassenger = function () {
@@ -92,24 +96,37 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
     };
 
     $scope.makeReservation = function () {
-        var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
-        var finalUrl = "api/momondo";
-        var jsonObject = JSON.stringify({flightID: flightFactory.getreservationFlightID(),
-            url: flightUrl,
-            numberOfSeats: $scope.reservationSeats,
-            ReserveeName: $scope.reservationName,
-            ReservePhone: $scope.reservationPhone,
-            ReserveeEmail: $scope.reservationEmail,
-            Passengers: $scope.passengerReservationList});
+        
+        if ($scope.reservationSeats == $scope.passengerReservationList.length) {
+            var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
+            var finalUrl = "api/momondo";
+            var jsonObject = JSON.stringify({flightID: flightFactory.getreservationFlightID(),
+                url: flightUrl,
+                numberOfSeats: $scope.reservationSeats,
+                ReserveeName: $scope.reservationName,
+                ReservePhone: $scope.reservationPhone,
+                ReserveeEmail: $scope.reservationEmail,
+                Passengers: $scope.passengerReservationList});
 
-        $http.post(finalUrl, jsonObject).then(function successCallback(res) {
+            $http.post(finalUrl, jsonObject).then(function successCallback(res) {
 
-            console.log(res.data);
-            $scope.reservationMsg = "Your reservation was successfull";
+                console.log(res.data);
+                $scope.reservationMsg = "Your reservation was successful";
+                $scope.reservation = "Reservation";
+                $scope.line1 = "You fly from: "+res.data.Origin+"   To: "+res.data.Destination;
+                $scope.line2 = "Your flightnumber is: "+res.data.flightID;
+                $scope.line3 = "The date of your departure is: ";
+                $scope.line4 = res.data.Date;
+                $scope.line5 = "The time of your departure is: ";
+                $scope.line6 = "Passengers: ";
+                $scope.line7 = res.data.Passengers;
 
-        }, function errorCallback(res) {
-            $scope.reservationMsg = "Failed to complete the reservation";
-        });
+            }, function errorCallback(res) {
+                $scope.reservationMsg = "Failed to complete the reservation";
+            });
+        }else{
+            $scope.reservationMsg = "Your reservation was not successful, the number of seats didn´t match the amount of passengers";
+        }
     };
 
 });

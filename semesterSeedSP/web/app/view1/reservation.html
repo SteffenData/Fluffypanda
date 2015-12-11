@@ -1,30 +1,41 @@
 <div>
-    <div class="col-md-6">
-        <h3>Reservation</h3>
-        <p ng-bind="reservationFlightID"></p><br>
-        Number of seats<br> <input type="number" ng-model="reservationSeats"><br>
-        Name <br><input type="text" ng-model="reservationName"><br>
-        Phone <br><input type="text" ng-model="reservationPhone"><br>
-        Email <br><input type="email" ng-model="reservationEmail"><br>
-        <br>
-        <p>Add passsengers</p>
-        Firstname <br><input type="text" ng-model="passenger.reservationFirstname"><br>
-        Lastname <br><input type="text" ng-model="passenger.reservationLastname"><br><br>
-        <button ng-click="addPassenger(passenger)">Add</button>
-        <button ng-click="removePassenger()">Remove</button>
-        <br><br><br><br>
-        <button ng-click="makeReservation()">Make reservation</button>
-        <br><br><br><br>
-        <a href="#view1"><button>Home</button></a>
+    <div class="col-md-4">
+        <form>
+            <h3>Reservation</h3>
+            <p ng-bind="reservationFlightID"></p><br>
+            Number of seats<br> <input type="number" placeholder="Amount" ng-model="reservationSeats" required><br>
+            Name <br><input type="text" placeholder="Name" ng-model="reservationName" required><br>
+            Phone <br><input type="text" placeholder="Phonenumber" ng-model="reservationPhone" minlength="8" required><br>
+            Email <br><input type="email" placeholder="Email" ng-model="reservationEmail" required><br>
+            <br>
+            <p>Add passsengers</p>
+            Firstname <br><input type="text" ng-model="passenger.reservationFirstname"><br>
+            Lastname <br><input type="text" ng-model="passenger.reservationLastname"><br><br>
+            <button ng-click="addPassenger(passenger)">Add</button>
+            <button ng-click="removePassenger()">Remove</button>
+            <br><br><br><br>
+            <button ng-click="makeReservation()">Make reservation</button>
+            <br><br><br><br>
+            <a href="#view1"><button>Home</button></a>
+        </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <h3>Passengers added</h3>
         <ul ng-repeat ="p in passengerReservationList track by $index">
             <li>{{p.lastName}}, {{p.firstName}}</li>
         </ul>
     </div>
-    <div class="col-md-4">
-        <p>{{reservationMsg}}</p>
+    <div class="col-md-8"><br><br><br><br><br><br>
+        <h2>{{reservationMsg}}</h2><br>
+        <h4>{{reservation}}</h4><br>
+        <h4>{{line1}}</h4>
+        <h4>{{line2}}</h4>
+        <h4>{{line3}}{{line4 | date:'yyyy-MM-dd'}}</h4>
+        <h4>{{line5}}{{line4 | date:'HH:mm:ss'}}</h4>
+        <h4>{{line6}}</h4>
+        <ul ng-repeat="passenger in line7">
+            <li>{{passenger.lastName}}, {{passenger.firstName}}</li>
+        </ul>
     </div>
 </div>
 
