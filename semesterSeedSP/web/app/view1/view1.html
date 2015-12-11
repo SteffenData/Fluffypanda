@@ -34,7 +34,6 @@
                         <td>Available seats</td>
                         <td>Total price </td>
                         <td>Travel time</td>
-                        <td>url</td>
                         <td>Make reservation</td>
                     </tr>
                 </thead>
@@ -49,7 +48,6 @@
                         <td>{{fly.numberOfSeats}}</td>
                         <td>{{fly.totalPrice| currency: "€ "}}</td>
                         <td>{{minToHours(fly.traveltime)}}</td>
-                        <td>{{fly.normalurl}}</td>
                         <td><a href="#reservation" ng-click="prepareReservation(fly.flightID, fly.normalurl)"> <button>Reserve</button></a></td>
                     </tr>
                 </tbody>
