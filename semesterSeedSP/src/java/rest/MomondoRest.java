@@ -32,16 +32,13 @@ import utility.Post;
 @Path("momondo/")
 public class MomondoRest {
 
-    MomondoFacade f;
-    Gson gsonDate;
-    Post p;
-    
-    public MomondoRest() {
-
-        f = new MomondoFacade();
-        gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
-        p = new Post();
-    }
+    public static MomondoFacade f = new MomondoFacade();  
+//    public static Gson gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
+      
+//    public MomondoRest() {
+//
+//        f = new MomondoFacade();        
+//    }
 
     @GET
     @Path("{from}/{date}/{numtickets}")
@@ -103,6 +100,7 @@ public class MomondoRest {
     @Consumes("application/json")
     @Produces("application/json")
     public Response reservationRequest(String jsonString) throws IOException{
+       Post p = new Post();
        JsonObject js = new JsonParser().parse(jsonString).getAsJsonObject();
        String url = js.get("url").getAsString();
        js.remove("url");

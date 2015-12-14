@@ -31,12 +31,11 @@ import javax.ws.rs.core.Response;
 public class FluffyPandaRest {
 
     FluffyPandaFacade f;
-    Gson gsonDate;
+    public static Gson gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
 
     public FluffyPandaRest() {
 
         f = new FluffyPandaFacade();
-        gsonDate = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
 
     }
 
