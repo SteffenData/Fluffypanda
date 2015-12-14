@@ -20,6 +20,7 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
     $scope.reservationFlightID = flightFactory.getreservationFlightID();
 
     $scope.getFlights = function () {
+        $scope.loadImg = true;
         $scope.MSG = "";
         $scope.data = "";
         var year = $scope.date.getFullYear();
@@ -31,16 +32,18 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         var url = 'api/momondo/' + $scope.from + "/" + finaldate + "/" + $scope.seats;
 
         $http.get(url).then(function successCallback(res) {
-
+            $scope.loadImg = false;
             console.log(res.data);
             $scope.data = res.data;
-
+            
         }, function errorCallback(res) {
+            $scope.loadImg = false;
             $scope.MSG = "No results found";
         });
     };
 
     $scope.getFlights2 = function () {
+        $scope.loadImg = true;
         $scope.MSG = "";
         $scope.data = "";
         var year = $scope.date2.getFullYear();
@@ -52,11 +55,12 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         var url = 'api/momondo/' + $scope.from2 + "/" + $scope.to2 + "/" + finaldate2 + "/" + $scope.seats2;
 
         $http.get(url).then(function successCallback(res) {
-
+            $scope.loadImg = false;
             console.log(res.data);
             $scope.data = res.data;
 
         }, function errorCallback(res) {
+            $scope.loadImg = false;
             $scope.MSG = "No results found";
         });
     };
@@ -97,7 +101,9 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
 
     $scope.makeReservation = function () {
         
+        
         if ($scope.reservationSeats == $scope.passengerReservationList.length) {
+            $scope.loadImgReservation = true;
             var flightUrl = flightFactory.getreservationUrl() + "api/flightreservation";
             var finalUrl = "api/momondo";
             var jsonObject = JSON.stringify({flightID: flightFactory.getreservationFlightID(),
@@ -109,7 +115,7 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
                 Passengers: $scope.passengerReservationList});
 
             $http.post(finalUrl, jsonObject).then(function successCallback(res) {
-
+                $scope.loadImgReservation = false;
                 console.log(res.data);
                 $scope.reservationMsg = "Your reservation was successful";
                 $scope.reservation = "Reservation";
@@ -122,6 +128,7 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
                 $scope.line7 = res.data.Passengers;
 
             }, function errorCallback(res) {
+                $scope.loadImgReservation = false;
                 $scope.reservationMsg = "Failed to complete the reservation";
             });
         }else{
