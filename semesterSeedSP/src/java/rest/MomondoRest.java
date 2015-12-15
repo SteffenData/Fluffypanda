@@ -162,7 +162,17 @@ public class MomondoRest {
             jo.addProperty("FlightTime",r.getFlightTime());
             jo.addProperty("numberOfSeats",r.getNumberOfSeats());
             jo.addProperty("ReserveeName",r.getReserveeName());
+            JsonArray jsonPassengers = new JsonArray();
             
+            List<Passenger> passengerList = r.getPassengers();
+            for (Passenger p : passengerList)
+            {
+                JsonObject jo2 = new JsonObject();
+                jo2.addProperty("firstName", p.getFirstname());
+                jo2.addProperty("lastName", p.getLastname());
+                jsonPassengers.add(jo2);
+            }
+            jo.addProperty("Passengers",jsonPassengers.toString());
             jsonReservations.add(jo);
         }
 
