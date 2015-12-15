@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, userFactory) {
 
           function url_base64_decode(str) {
             var output = str.replace('-', '+').replace('_', '/');
@@ -45,6 +45,7 @@ angular.module('myApp.security', [])
                       var encodedProfile = data.token.split('.')[1];
                       var profile = JSON.parse(url_base64_decode(encodedProfile));
                       $scope.username = profile.username;
+                      userFactory.setUsername(profile.username);
                       var roles = profile.roles.split(",");
                       roles.forEach(function (role) {
                         if (role === "Admin") {

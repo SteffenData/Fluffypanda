@@ -12,6 +12,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.MomondoFlight;
+import entity.Passenger;
+import entity.Reservation;
 import facades.MomondoFacade;
 import java.io.IOException;
 import java.util.List;
@@ -108,5 +110,37 @@ public class MomondoRest {
        
        String stringResponse = p.postReservation(url, finalJs);
        return Response.status(Response.Status.OK).entity(stringResponse).build();
+    }
+    
+    @POST
+    @Path("savereservation/{username}")
+    @Consumes("application/json")
+    public Response saveReservation(@PathParam("username")String userName, String jsonString) throws IOException{
+       
+       JsonObject js = new JsonParser().parse(jsonString).getAsJsonObject();
+       
+       String flightID = js.get("flightID").getAsString();
+       String origin = js.get("Origin").getAsString();
+       String destination = js.get("Destination").getAsString();
+       String date = js.get("Date").getAsString();
+       int flightTime = js.get("FlightTime").getAsInt();
+       int numberOfSeats = js.get("numberOfSeats").getAsInt();
+       String reserveeName = js.get("ReserveeName").getAsString();
+       
+       Reservation reservation = new Reservation(flightID,origin,destination,date,flightTime,numberOfSeats,reserveeName);
+       
+       JsonArray jsonPassengerArray = js.get("Passengers").getAsJsonArray();
+       for(JsonElement jsonPassenger : jsonPassengerArray){
+          String firstname = jsonPassenger.getAsJsonObject().get("firstName").getAsString();
+          String lastname = jsonPassenger.getAsJsonObject().get("lastName").getAsString();
+          Passenger p = new Passenger(firstname,lastname);
+          reservation.addPassengers(p);
+          p.setReservation(reservation);
+          
+       }
+       
+       f.saveReservation(userName, reservation);
+       
+       return Response.status(Response.Status.OK).build();
     }
 }

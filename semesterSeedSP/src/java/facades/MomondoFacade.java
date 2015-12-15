@@ -7,7 +7,9 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.MomondoFlight;
+import entity.Reservation;
 import entity.Urls;
+import entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -47,6 +49,22 @@ public class MomondoFacade {
         }
 
         return urlsList;
+    }
+    
+    public void saveReservation(String userName, Reservation reservation){
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            User u = em.find(User.class, userName);
+            u.addReservation(reservation);
+            reservation.setUser(u);
+//            em.persist(reservation);
+            em.persist(u);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
     public List<MomondoFlight> getFlightsSimple(String origin, String date, int numberOfTickets) throws InterruptedException, ExecutionException {

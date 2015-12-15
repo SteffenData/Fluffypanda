@@ -13,28 +13,41 @@ angular.module('myApp.factories', []).
             };
         })
         .factory('flightFactory', function () {
-            var reservationUrl ="";
+            var reservationUrl = "";
             var reservationFlightID = "";
             var airid = {};
-            
+
             airid.getreservationFlightID = function () {
-                
+
                 return reservationFlightID;
             };
 
             airid.setreservationFlightID = function (id) {
                 reservationFlightID = id;
             };
-             airid.getreservationUrl = function () {
-                
+            airid.getreservationUrl = function () {
+
                 return reservationUrl;
             };
-             airid.setreservationUrl = function (url) {
-                
+            airid.setreservationUrl = function (url) {
+
                 reservationUrl = url;
             };
 
             return airid;
 
+        })
+        .factory('userFactory', function () {
+            var userName = "";
+            var user = {};
+
+            user.getUsername = function () {
+                return userName;
+            };
+
+            user.setUsername = function (name) {
+                userName = name;
+            };
+            return user;
         });
   

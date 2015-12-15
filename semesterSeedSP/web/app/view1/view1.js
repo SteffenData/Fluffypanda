@@ -14,7 +14,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
+app.controller('View1Ctrl', function ($scope, $http, flightFactory, userFactory) {
 
     $scope.passengerReservationList = [];
     $scope.reservationFlightID = flightFactory.getreservationFlightID();
@@ -94,6 +94,18 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
         $scope.passenger.reservationLastname = "";
         } 
     };
+    
+    $scope.saveReservation = function (reservationInfo) {
+        var userName = userFactory.getUsername();
+        var url = "api/momondo/savereservation/"+userName;
+         alert("1" + userName + url); 
+        $http.post(url,reservationInfo).then(function successCallback(res) {
+              alert("alert 2");
+
+            }, function errorCallback(res) {
+                alert("alert 3");
+            });
+    };
 
     $scope.removePassenger = function () {
         $scope.passengerReservationList.pop();
@@ -117,6 +129,8 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory) {
             $http.post(finalUrl, jsonObject).then(function successCallback(res) {
                 $scope.loadImgReservation = false;
                 console.log(res.data);
+                
+                $scope.saveReservation(res.data);
                 $scope.reservationMsg = "Your reservation was successful";
                 $scope.reservation = "Reservation";
                 $scope.line1 = "You fly from: "+res.data.Origin+"   To: "+res.data.Destination;

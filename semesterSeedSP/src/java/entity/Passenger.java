@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,9 +23,19 @@ public class Passenger {
     private long id;
     private String firstname;
     private String lastname;
+    @ManyToOne
+    @JoinColumn(name="Reservation_ID")
+    private Reservation reservation;
 
     public Passenger() {
     }
+
+    public Passenger(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    
+    
 
     public long getId() {
         return id;
@@ -31,6 +43,14 @@ public class Passenger {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     public String getFirstname() {
