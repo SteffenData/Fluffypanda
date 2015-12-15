@@ -98,12 +98,9 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory, userFactory)
     $scope.saveReservation = function (reservationInfo) {
         var userName = userFactory.getUsername();
         var url = "api/momondo/savereservation/"+userName;
-         alert("1" + userName + url); 
         $http.post(url,reservationInfo).then(function successCallback(res) {
-              alert("alert 2");
 
             }, function errorCallback(res) {
-                alert("alert 3");
             });
     };
 
