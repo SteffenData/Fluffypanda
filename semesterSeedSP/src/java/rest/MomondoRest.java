@@ -143,4 +143,29 @@ public class MomondoRest {
        
        return Response.status(Response.Status.OK).build();
     }
+    
+    @GET
+    @Path("getreservation/{us}")
+    @Consumes("application/json")
+    public Response getReservationByUsername(@PathParam("us") String userName){
+    
+        List<Reservation> reservationsList = f.getReservationByUsername(userName);
+        JsonArray jsonReservations = new JsonArray();
+
+        for (Reservation r : reservationsList) {
+
+            JsonObject jo = new JsonObject();
+            jo.addProperty("flightID", r.getFlightID());
+            jo.addProperty("Origin", r.getOrigin());
+            jo.addProperty("Destination",r.getDestination());
+            jo.addProperty("Date",r.getDate());
+            jo.addProperty("FlightTime",r.getFlightTime());
+            jo.addProperty("numberOfSeats",r.getNumberOfSeats());
+            jo.addProperty("ReserveeName",r.getReserveeName());
+            
+            jsonReservations.add(jo);
+        }
+
+        return Response.status(Response.Status.OK).entity(jsonReservations.toString()).build();
+    }
 }

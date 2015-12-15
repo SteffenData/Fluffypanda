@@ -9,14 +9,19 @@ angular.module('myApp.view2', ['ngRoute'])
             });
           }])
 
-        .controller('View2Ctrl', function ($http, $scope) {
+        .controller('View2Ctrl', function ($http, $scope, userFactory) {
+          $scope.MSG = "";
+          $scope.loadImg = true;
+          var userName = userFactory.getUsername();
           $http({
             method: 'GET',
-            url: 'api/demouser'
+            url: 'api/momondo/getreservation/'+ userName
           }).then(function successCallback(res) {
-            $scope.data = res.data.message;
+            $scope.loadImg = false;
+            $scope.data = res.data;
           }, function errorCallback(res) {
-            $scope.error = res.status + ": "+ res.data.statusText;
+            $scope.loadImg = false;
+            $scope.MSG = "Your reservations were not found";
           });
 
         });

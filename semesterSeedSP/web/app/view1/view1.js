@@ -99,8 +99,9 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory, userFactory)
         var userName = userFactory.getUsername();
         var url = "api/momondo/savereservation/"+userName;
         $http.post(url,reservationInfo).then(function successCallback(res) {
-
+            $scope.reservationMsg = "Your reservation was successful";
             }, function errorCallback(res) {
+             $scope.reservationMsg = "Fail to save your reservation. Please try again";   
             });
     };
 
@@ -128,7 +129,6 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory, userFactory)
                 console.log(res.data);
                 
                 $scope.saveReservation(res.data);
-                $scope.reservationMsg = "Your reservation was successful";
                 $scope.reservation = "Reservation";
                 $scope.line1 = "You fly from: "+res.data.Origin+"   To: "+res.data.Destination;
                 $scope.line2 = "Your flightnumber is: "+res.data.flightID;
