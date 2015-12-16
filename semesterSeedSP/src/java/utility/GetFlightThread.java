@@ -54,6 +54,7 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
         gson = new Gson();
         url = new URL(finalUrl);
         urlConnection = url.openConnection();
+        
         if (urlConnection != null && urlConnection.getInputStream() != null) {
 
             inputStream = new InputStreamReader(urlConnection.getInputStream(), Charset.defaultCharset());
@@ -62,7 +63,12 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
             while ((cp = bufferedReader.read()) != -1) {
                 stringBuilder.append((char) cp);
             }
+            try {
             jsonObject = new JsonParser().parse(stringBuilder.toString()).getAsJsonObject();
+                
+            } catch (Exception e) {
+                return momondoFlights;
+            }
 
             if (jsonObject.get("airline") == null) {
                 return momondoFlights;
@@ -87,6 +93,9 @@ public class GetFlightThread implements Callable<List<MomondoFlight>> {
                 return momondoFlights;
             }
         }
+        else{
+        
         return momondoFlights;
+        }
     }
 }

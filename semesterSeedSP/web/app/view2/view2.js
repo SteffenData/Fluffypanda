@@ -19,6 +19,8 @@ angular.module('myApp.view2', ['ngRoute'])
           }).then(function successCallback(res) {
             $scope.loadImg = false;
             $scope.data = res.data;
+             
+           
           }, function errorCallback(res) {
             $scope.loadImg = false;
             $scope.MSG = "Your reservations were not found";

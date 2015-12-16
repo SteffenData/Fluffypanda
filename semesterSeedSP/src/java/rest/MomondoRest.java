@@ -172,7 +172,7 @@ public class MomondoRest {
                 jo2.addProperty("lastName", p.getLastname());
                 jsonPassengers.add(jo2);
             }
-            jo.addProperty("Passengers",jsonPassengers.toString());
+            jo.add("Passengers",jsonPassengers);
             jsonReservations.add(jo);
         }
 

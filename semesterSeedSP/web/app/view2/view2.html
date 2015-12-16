@@ -1,32 +1,30 @@
-<h2>Your reservations</h2>
-<div class="row">
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Flight Id</td>
-                    <td>Origin</td>
-                    <td>Destination</td>
-                    <td>Date</td>
-                    <td>Flight time</td>
-                    <td>Number of seats</td>
-                    <td>Reservee name</td>
-                    <td>Passengers:</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="res in data">
-                    <td>{{res.flightID}}</td>
-                    <td>{{res.Origin}}</td>
-                    <td>{{res.Destination}}</td>
-                    <td>{{res.Date}}</td>
-                    <td>{{res.FlightTime}}</td>
-                    <td>{{res.numberOfSeats}}</td>
-                    <td>{{res.ReserveeName}}</td>
-                    <td>{{res.Passengers}}</td>
-                </tr>
-            </tbody>
-        </table>
+
+<div>
+    <div class="col-md-4"></div>
+    <div class="col-md-6">
+        <h2>Your reservations</h2>
+    </div>
+</div>
+<div>
+    <div ng-repeat="res in data">
+        <div id="div-2">
+            <div class="col-md-8">
+                <p>FlightId: {{res.flightID}}</p>
+                <p>Origin: {{res.Origin}}</p>
+                <p>Destination: {{res.Destination}}</p>
+                <p>Date: {{res.Date}}</p>
+                <p>Flighttime: {{res.FlightTime}}</p>
+                <p>Number of seats: {{res.numberOfSeats}}</p>
+                <p>Reserveename: {{res.ReserveeName}}</p>
+                <br><br><br>
+            </div>
+            <div class="col-md-4">
+                <p>Passengers:</p>
+                <ul ng-repeat="pas in res.Passengers track by $index">
+                    <li>{{pas.lastName}} , {{pas.firstName}}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <div>
@@ -35,13 +33,11 @@
         <img src="app/view1/img/flyingcat.gif" alt="sm" ng-show="loadImg" width="100px" height="100px"/>
     </div>
 </div>
-<br><br>
-<p>{{MSG}}</p> 
-<br><br>
-
-
-
-
 <div>
-    <p>Data from server <b style="color: darkblue">{{data}}</b></p>
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+        <br><br>
+        <p>{{MSG}}</p> 
+        <br><br>
+    </div>
 </div>
