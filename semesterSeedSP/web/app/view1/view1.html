@@ -20,10 +20,10 @@
 </div> 
 <div>
     <div>
-    <div class="col-md-5"></div>
-    <div class="col-md-7">
-        <img src="app/view1/img/flyingcat.gif" alt="sm" ng-show="loadImg" width="100px" height="100px"/>
-    </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-7">
+            <img src="app/view1/img/flyingcat.gif" alt="sm" ng-show="loadImg" width="100px" height="100px"/>
+        </div>
     </div>
     <h3 >Available Flights</h3>
     <div class="row">
@@ -50,7 +50,7 @@
                         <td>{{fly.origin}}</td>
                         <td>{{fly.destination}}</td>
                         <td>{{fly.date| date:'yyyy-MM-dd'}}</td>
-                        <td>{{fly.date| date:'HH:mm:ss Z'}}</td>
+                        <td>{{fly.date| date:'HH:mm'}}</td>
                         <td>{{fly.numberOfSeats}}</td>
                         <td>{{fly.totalPrice| currency: "€ "}}</td>
                         <td>{{minToHours(fly.traveltime)}}</td>

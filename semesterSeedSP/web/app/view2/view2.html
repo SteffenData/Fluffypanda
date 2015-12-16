@@ -7,10 +7,11 @@
                 <p>FlightId: {{res.flightID}}</p>
                 <p>Origin: {{res.Origin}}</p>
                 <p>Destination: {{res.Destination}}</p>
-                <p>Date: {{res.Date}}</p>
-                <p>Flighttime: {{res.FlightTime}}</p>
+                <p>Date: {{res.Date | date:'yyyy-MM-dd'}}</p>
+                <p>Time: {{res.Date | date:'HH:mm'}}</p>
+                <p>Flighttime: {{minToHours(res.FlightTime)}}</p>
                 <p>Number of seats: {{res.numberOfSeats}}</p>
-                <p>Reserveename: {{res.ReserveeName}}</p>
+                <p>Reservee name: {{res.ReserveeName}}</p>
                 <br><br><br>
             </div>
             <div class="col-md-4">
