@@ -53,7 +53,6 @@ app.controller('View1Ctrl', function ($scope, $http, flightFactory, userFactory)
         var finaldate2 = $scope.jsdate2.toISOString();
 
         var url = 'api/momondo/' + $scope.from2 + "/" + $scope.to2 + "/" + finaldate2 + "/" + $scope.seats2;
-
         $http.get(url).then(function successCallback(res) {
             $scope.loadImg = false;
             console.log(res.data);

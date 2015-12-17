@@ -68,7 +68,6 @@ public class MomondoFacade
             User u = em.find(User.class, userName);
             u.addReservation(reservation);
             reservation.setUser(u);
-//            em.persist(reservation);
             em.persist(u);
             em.getTransaction().commit();
         } finally
@@ -121,9 +120,9 @@ public class MomondoFacade
             String normalUrl = urls.getUrls();
             finalUrl = urls.getUrls() + "api/flightinfo/" + origin + "/" + destination + "/" + date + "/" + numberOfTickets;
             Future<List<MomondoFlight>> futureFlights = ex.submit(new GetFlightThread(finalUrl, normalUrl));
-            futureMomondoFlight.add(futureFlights);
+            futureMomondoFlight.add(futureFlights);        
         }
-
+        
         for (Future<List<MomondoFlight>> futureFlights : futureMomondoFlight)
         {
             List<MomondoFlight> f1 = futureFlights.get();

@@ -18,6 +18,7 @@ import facades.MomondoFacade;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,6 +45,7 @@ public class MomondoRest {
 
     @GET
     @Path("{from}/{date}/{numtickets}")
+    @RolesAllowed("User")
     @Consumes("application/json")
     public Response getFlightsSimple(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws InterruptedException, ExecutionException {
 
@@ -72,11 +74,12 @@ public class MomondoRest {
 
     @GET
     @Path("{from}/{to}/{date}/{numtickets}")
+    @RolesAllowed("User")
     @Consumes("application/json")
     public Response getFlightsAdvanced(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("numtickets") int numtickets) throws InterruptedException, ExecutionException {
-
+     
         List<MomondoFlight> momondoFlightList = f.getFlightsAdvanced(from, to, date, numtickets);
-
+      
         JsonArray jsonFlights = new JsonArray();
 
         for (MomondoFlight m : momondoFlightList) {

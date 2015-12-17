@@ -17,7 +17,6 @@ public class MomondoFlight {
     private String airline;
     private String flightId;
     private String date;
-//    private Date date;
     private int numberOfSeats;
     private double totalPrice;
     private int travelTime;

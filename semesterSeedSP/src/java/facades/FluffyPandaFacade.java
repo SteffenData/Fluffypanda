@@ -81,10 +81,10 @@ public class FluffyPandaFacade {
 
     public List<FlightInstance> getAllFlights() {
         EntityManager em = getEntityManager();
-        List<FlightInstance> currencyList;
+        List<FlightInstance> flightInstanceList;
         try {
-            currencyList = em.createQuery("SELECT f FROM FlightInstance f", FlightInstance.class).getResultList();
-            return currencyList;
+            flightInstanceList = em.createQuery("SELECT f FROM FlightInstance f", FlightInstance.class).getResultList();
+            return flightInstanceList;
         } finally {
             em.close();
         }

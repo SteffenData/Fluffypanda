@@ -37,11 +37,7 @@ public class DummyData
        
         Airport airport1 = new Airport("CPH","Copenhagen Airport", "Copenhagen", "+1");
         Airport airport2 = new Airport("BCN","Barcelona Airport", "Barcelona", "+1");
-         
-//        Date date1 = formatter.parse("2001-07-04T12:08:56.235-0700");
      
-
-        
         Date date = formatter.parse("2016-01-05T11:00:00.000-0100");
         Date date2 = formatter.parse("2016-01-06T11:00:00.234-0100");
         Date date3 = formatter.parse("2016-01-05T17:00:00.214-0100");
